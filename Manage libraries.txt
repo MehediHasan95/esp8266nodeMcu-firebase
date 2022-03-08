@@ -1,0 +1,11 @@
+
+Additional Board Manager URL: 
+-----------------------------------------------------------------------------------
+https://arduino.esp8266.com/stable/package_esp8266com_index.json
+-----------------------------------------------------------------------------------
+
+Board Manager >> esp8266 >> Installed
+
+Open Sketch >> include library >> add.ZIP library and add ZIP library to Arduino IDE
+
+Open Tools >> Manage Library and install ArduinoJson version 5.13.5 library.

@@ -5,7 +5,6 @@
 #include <ESP8266HTTPClient.h>
 #include "ESP8266WebServer.h"
 #include <FirebaseArduino.h>
-#define REPORTING_PERIOD_MS 1000
 #define FIREBASE_HOST "esp8266-testing-8d30e-default-rtdb.firebaseio.com"
 #define FIREBASE_AUTH "CnNAzPZwBdr9VBbrT7u1hNNRBXTbIcKu4nd8hBq0"
 #define WIFI_SSID "Hasan"
@@ -53,7 +52,7 @@ void setup()
   }
   else
   {
-    Serial.println("CONNECTION SUCCESS");
+    Serial.println("CONNECTION SUCCESSFULLY");
   }
 
   pox.setOnBeatDetectedCallback(onBeatDetected);

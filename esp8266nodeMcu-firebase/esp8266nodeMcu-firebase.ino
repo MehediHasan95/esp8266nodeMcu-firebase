@@ -55,7 +55,7 @@ void setup()
     Serial.println("CONNECTION SUCCESSFULLY");
   }
 
-  pox.setOnBeatDetectedCallback(onBeatDetected);
+ pox.setOnBeatDetectedCallback(onBeatDetected);
 }
 
 void oxiMeter()
@@ -63,7 +63,7 @@ void oxiMeter()
   float bpm = pox.getHeartRate();
   float SpO2 = pox.getSpO2();
 
-  if (heartBeatDetected && bpm != 0)
+  if ( bpm != 0)
   {
     if (SpO2 > 0)
     {

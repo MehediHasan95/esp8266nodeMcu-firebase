@@ -16,13 +16,13 @@
 
 PulseOximeter pox;
 
-const int numReadings = 10;
+const int numReadings = 15;
 float filterweight = 0.5;
 uint32_t tsLastReport = 0;
 uint32_t last_beat = 0;
 int readIndex = 0;
-float average_beat = 0;
-float average_SpO2 = 0;
+float average_beat;
+int average_SpO2;
 bool calculation_complete = false;
 bool calculating = false;
 bool initialized = false;
@@ -38,12 +38,10 @@ void viewBeat()
 {
   if (beat == 0)
   {
-    Serial.print("💔");
     beat = 1;
   }
   else
   {
-    Serial.print("❤");
     beat = 0;
   }
 }
@@ -75,9 +73,9 @@ void display_values()
     Firebase.pushFloat("Heart-rate/BPM", average_beat);
     Firebase.pushInt("Heart-rate/SpO2", average_SpO2);
   }
-
+  Serial.print("Heart-rate: ");
   Serial.print(average_beat);
-  Serial.print("bpm | SpO2: ");
+  Serial.print(" BPM || SpO2: ");
   Serial.print(average_SpO2);
   Serial.print("%");
 }
@@ -105,31 +103,21 @@ void calculate_average(float beat, int SpO2)
 void firebaseInitialize()
 {
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-  Serial.print("CONNECTING");
   while (WiFi.status() != WL_CONNECTED)
   {
     Serial.print("📡");
     delay(500);
   }
-
   Serial.println();
-  Serial.print("CONNECTED WITH IP: ");
+  Serial.print("✔✔✔CONNECTION SUCCESSFULL✔✔✔: ");
   Serial.println(WiFi.localIP());
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
-  Firebase.reconnectWiFi(true);
-  if (Firebase.failed())
-  {
-    Serial.print("SETTING / MESSAGE FAILED: ");
-    Serial.println(Firebase.error());
-  }
 }
 
 void setup()
 {
   Serial.begin(115200);
-
   firebaseInitialize();
-
   pox.begin();
   pox.setOnBeatDetectedCallback(onBeatDetected);
 }
